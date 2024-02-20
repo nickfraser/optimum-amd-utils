@@ -1,0 +1,31 @@
+[project]
+name = "optimum_amd_utils"
+description = "A collections of tools for use with optimum-amd"
+authors = [
+    { name = "Nicholas J. Fraser", email = "icanlosh@gmail.com" },
+]
+dependencies = [
+    "optimum-amd",
+    "brevitas >= 0.10.2",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[build-system]
+requires = [
+    "setuptools >= 61.0.0",
+    "wheel",
+    "setuptools_scm[toml]>=6.2"
+]
+build.backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]
