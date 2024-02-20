@@ -7,7 +7,7 @@ import torch
 from optimum_amd_utils.examples.quantize_llm import main
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def default_args():
     args = OrderedDict()
     args.model = "facebook/opt-125m"
@@ -25,11 +25,47 @@ def default_args():
     return args
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def default_run_args(default_args):
     args = default_args
     args.nsamples = 2
     args.seqlen = 2
+    return args
+
+
+@pytest.fixture(params=[False, True])
+def apply_gptq(request):
+    yield request.param
+
+
+@pytest.fixture(params=[False, True])
+def apply_weight_equalization(request):
+    yield request.param
+
+
+@pytest.fixture(params=[False, True])
+def apply_bias_correction(request):
+    yield request.param
+
+
+@pytest.fixture(params=[None, "cross_layer", "layerwise"])
+def activations_equalization(request):
+    yield request.param
+
+
+@pytest.fixture(params=[False, True])
+def is_static(request):
+    yield request.param
+
+
+@pytest.fixture()
+def run_all_args(default_run_args, apply_gptq, apply_weight_equalization, apply_bias_correction, activations_equalization, is_static):
+    args = default_run_args
+    args.apply_gptq = apply_gptq
+    args.apply_weight_equalization = apply_weight_equalization
+    args.apply_bias_correction = apply_bias_correction
+    args.activations_equalization = activations_equalization
+    args.is_static = is_static
     return args
 
 
@@ -41,7 +77,12 @@ def run_main():
     return _run_main
 
 
-def test_opt(run_main, default_run_args):
-    return_val = run_main(default_run_args)
+@pytest.mark.run
+@pytest.mark.cpu
+@pytest.mark.opt
+def test_opt_cpu(run_main, run_all_args):
+    args = run_all_args
+    args.device = "cpu"
+    return_val = run_main(run_all_args)
     assert type(return_val["float_perplexity"]) == torch.Tensor
     assert type(return_val["quant_perplexity"]) == torch.Tensor
