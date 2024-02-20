@@ -1,0 +1,28 @@
+name: oamd_pt2.1.2
+channels:
+  - pytorch
+  - conda-forge
+  - nvidia
+dependencies:
+  - pytorch==2.1.2
+  - pytorch-cuda=11.8
+  - pre-commit
+  - onnx
+  - onnxruntime>=1.15.0
+  - packaging
+  - pyyaml
+  - setuptools_scm
+  - tqdm
+  - pytest
+  - numpy
+  - setuptools
+  - sympy
+  - typing-extensions>=3.7.4
+  - ninja
+  - pip:
+    - onnxoptimizer
+    - unfoldNd
+    - git+https://github.com/huggingface/accelerate.git@main
+    - git+https://github.com/huggingface/transformers.git@4b236aed7618d90546cd2e8797dab5b4a24c5dce
+    - optimum>=1.17.0
+    - brevitas>=0.10.2
