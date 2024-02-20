@@ -172,7 +172,7 @@ def test_all_opt_acc(run_main, run_all_args):
 @pytest.mark.acc_offload
 @pytest.mark.opt
 @pytest.mark.short
-def test_toggle_opt_cpu(run_main, run_toggle_args):
+def test_toggle_opt_acc_offload(run_main, run_toggle_args):
     args = run_toggle_args
     args.device = "auto"
     args.gpu_device_map = {0: 1.2e8}
@@ -185,7 +185,7 @@ def test_toggle_opt_cpu(run_main, run_toggle_args):
 @pytest.mark.acc_offload
 @pytest.mark.opt
 @pytest.mark.long
-def test_all_opt_cpu(run_main, run_all_args):
+def test_all_opt_acc_offload(run_main, run_all_args):
     args = run_all_args
     args.device = "auto"
     args.gpu_device_map = {0: 1.2e8}
