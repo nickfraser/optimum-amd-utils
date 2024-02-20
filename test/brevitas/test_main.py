@@ -69,6 +69,25 @@ def run_all_args(default_run_args, apply_gptq, apply_weight_equalization, apply_
     return args
 
 
+@pytest.fixture(params=[
+        [False, False, False, None, False],
+        [True, False, False, None, False],
+        [False, True, False, None, False],
+        [False, False, True, None, False],
+        [False, False, False, "cross_layer", False],
+        [False, False, False, "layerwise", False],
+        [False, False, False, None, True],
+    ])
+def run_toggle_args(default_run_args, request):
+    args = default_run_args
+    args.apply_gptq = request.param[0]
+    args.apply_weight_equalization = request.param[1]
+    args.apply_bias_correction = request.param[2]
+    args.activations_equalization = request.param[3]
+    args.is_static = request.param[4]
+    yield args
+
+
 @pytest.fixture(scope="session")
 def run_main():
     def _run_main(args):
@@ -80,7 +99,20 @@ def run_main():
 @pytest.mark.run
 @pytest.mark.cpu
 @pytest.mark.opt
-def test_opt_cpu(run_main, run_all_args):
+@pytest.mark.short
+def test_toggle_opt_cpu(run_main, run_toggle_args):
+    args = run_toggle_args
+    args.device = "cpu"
+    return_val = run_main(run_toggle_args)
+    assert type(return_val["float_perplexity"]) == torch.Tensor
+    assert type(return_val["quant_perplexity"]) == torch.Tensor
+
+
+@pytest.mark.run
+@pytest.mark.cpu
+@pytest.mark.opt
+@pytest.mark.long
+def test_all_opt_cpu(run_main, run_all_args):
     args = run_all_args
     args.device = "cpu"
     return_val = run_main(run_all_args)
