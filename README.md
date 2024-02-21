@@ -39,6 +39,12 @@ run the following:
 CUDA_VISIBLE_DEVICES=0 pytest -m "short and (cpu or gpu or acc or acc_offload)"
 ```
 
+Alternatively, to run all the tests with the "recommended" settings, run:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 pytest -m "recommended"
+```
+
 For any failing tests, you can use it's name to run it individually, for example:
 
 ```
