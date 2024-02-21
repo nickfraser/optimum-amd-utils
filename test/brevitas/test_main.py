@@ -232,7 +232,7 @@ def test_all_opt_acc(run_main, run_all_args):
 def test_toggle_opt_acc_offload(run_main, toggle_run_args):
     args = toggle_run_args
     args.device = "auto"
-    args.gpu_device_map = {0: 1.2e8}
+    args.gpu_device_map = {0: 5.0e8}
     return_val = run_main(args)
     assert type(return_val["float_perplexity"]) == torch.Tensor
     assert type(return_val["quant_perplexity"]) == torch.Tensor
@@ -246,7 +246,7 @@ def test_toggle_opt_acc_offload(run_main, toggle_run_args):
 def test_recommended_opt_acc_offload(run_main, recommended_run_args):
     args = recommended_run_args
     args.device = "auto"
-    args.gpu_device_map = {0: 1.2e8}
+    args.gpu_device_map = {0: 5.0e8}
     return_val = run_main(args)
     assert type(return_val["float_perplexity"]) == torch.Tensor
     assert type(return_val["quant_perplexity"]) == torch.Tensor
@@ -259,7 +259,7 @@ def test_recommended_opt_acc_offload(run_main, recommended_run_args):
 def test_all_opt_acc_offload(run_main, run_all_args):
     args = run_all_args
     args.device = "auto"
-    args.gpu_device_map = {0: 1.2e8}
+    args.gpu_device_map = {0: 5.0e8}
     return_val = run_main(args)
     assert type(return_val["float_perplexity"]) == torch.Tensor
     assert type(return_val["quant_perplexity"]) == torch.Tensor
