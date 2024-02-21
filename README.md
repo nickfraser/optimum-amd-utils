@@ -38,3 +38,9 @@ run the following:
 ```bash
 CUDA_VISIBLE_DEVICES=0 pytest -m "short and (cpu or gpu or acc or acc_offload)"
 ```
+
+For any failing tests, you can use it's name to run it individually, for example:
+
+```
+CUDA_VISIBLE_DEVICES=0 pytest "test/brevitas/test_main.py::test_toggle_opt_acc[run_toggle_args4]"
+```
