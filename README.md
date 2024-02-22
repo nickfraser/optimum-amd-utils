@@ -8,7 +8,7 @@ The test suite has been tested with the following:
  - python==3.11
  - PyTorch==2.12
  - accelerate==main
- - transformers==`4b236aed7618d90546cd2e8797dab5b4a24c5dce`
+ - transformers==4.38.0
  - optimum>=1.17.0
  - brevitas>=0.10.2
  - pytest==8.0.1

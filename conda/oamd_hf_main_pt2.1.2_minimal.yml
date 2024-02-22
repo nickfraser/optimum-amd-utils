@@ -23,6 +23,6 @@ dependencies:
     - onnxoptimizer
     - unfoldNd
     - git+https://github.com/huggingface/accelerate.git@main
-    - git+https://github.com/huggingface/transformers.git@4b236aed7618d90546cd2e8797dab5b4a24c5dce
+    - transformers==4.38.0
     - optimum>=1.17.0
     - brevitas>=0.10.2
