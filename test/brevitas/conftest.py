@@ -27,6 +27,15 @@ def default_small_mistral():
     return "hf-internal-testing/tiny-random-MistralForCausalLM"
 
 
+@pytest.fixture(scope="session", params=[
+    "facebook/opt-1.3b",
+    "TheBloke/Llama-2-7B-fp16",
+    "mistralai/Mistral-7B-v0.1",
+])
+def large_models(request):
+    yield request.param
+
+
 @pytest.fixture()
 def default_args(default_model):
     args = OrderedDict()
