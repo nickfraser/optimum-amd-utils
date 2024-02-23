@@ -37,7 +37,7 @@ def all_run_args_acc_gpus(all_run_args):
 @pytest.mark.short
 @multigpu
 def test_toggle_opt_acc_gpus(run_main_test, toggle_run_args_acc_gpus):
-    args = toggle_run_args
+    args = toggle_run_args_acc_gpus
     run_main_test(args)
 
 
@@ -48,7 +48,7 @@ def test_toggle_opt_acc_gpus(run_main_test, toggle_run_args_acc_gpus):
 @pytest.mark.recommended
 @multigpu
 def test_recommended_opt_acc_gpus(run_main_test, recommended_run_args_acc_gpus):
-    args = recommended_run_args
+    args = recommended_run_args_acc_gpus
     run_main_test(args)
 
 
@@ -58,5 +58,5 @@ def test_recommended_opt_acc_gpus(run_main_test, recommended_run_args_acc_gpus):
 @pytest.mark.long
 @multigpu
 def test_all_opt_acc_gpus(run_main_test, all_run_args_acc_gpus):
-    args = run_all_args
+    args = all_run_args_acc_gpus
     run_main_test(args)
