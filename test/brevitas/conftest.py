@@ -1,11 +1,17 @@
 
 from collections import OrderedDict
+import os
+import shutil
 
 import pytest
 
 import torch
 
+import onnx
+
 from optimum_amd_utils.examples.quantize_llm import main
+
+from test.brevitas.utils import ptid2pathname
 
 @pytest.fixture(scope="session")
 def default_model():
@@ -37,7 +43,7 @@ def large_models(request):
 
 
 @pytest.fixture()
-def default_args(default_model):
+def default_args(default_model, request):
     args = OrderedDict()
     args.model = default_model
     args.apply_gptq = False
@@ -48,7 +54,7 @@ def default_args(default_model):
     args.seqlen = 128
     args.nsamples = 128
     args.device = "auto"
-    args.onnx_output_path = "llm_quantized_onnx"
+    args.onnx_output_path = ptid2pathname(request.node.nodeid)
     args.gpu_device_map = None
     args.cpu_device_map = None
     return args
@@ -169,4 +175,6 @@ def run_main_test(run_main):
         return_val = run_main(args)
         assert type(return_val["float_perplexity"]) == torch.Tensor
         assert type(return_val["quant_perplexity"]) == torch.Tensor
+        onnx_model = onnx.load(os.path.join(args.onnx_output_path, "model.onnx"))
+        shutil.rmtree(args.onnx_output_path)
     return _run_main_test
