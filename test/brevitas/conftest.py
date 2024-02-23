@@ -18,23 +18,17 @@ def default_model():
     return "facebook/opt-125m"
 
 
-@pytest.fixture(scope="session")
-def default_small_opt(default_model):
-    return default_small_opt
-
-
-@pytest.fixture(scope="session")
-def default_small_llama():
-    return "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T"
-
-
-@pytest.fixture(scope="session")
-def default_small_mistral():
-    return "hf-internal-testing/tiny-random-MistralForCausalLM"
+@pytest.fixture(scope="session", params=[
+    "facebook/opt-125m",
+    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+    "hf-internal-testing/tiny-random-MistralForCausalLM",
+])
+def small_models(request):
+    yield request.param
 
 
 @pytest.fixture(scope="session", params=[
-    "facebook/opt-1.3b",
+    # "facebook/opt-1.3b",
     "TheBloke/Llama-2-7B-fp16",
     "mistralai/Mistral-7B-v0.1",
 ])
@@ -81,20 +75,6 @@ def recommended_run_args(recommended_args):
     args = recommended_args
     args.nsamples = 2
     args.seqlen = 2
-    return args
-
-
-@pytest.fixture()
-def recommended_llama_run_args(recommended_run_args, default_small_llama):
-    args = recommended_run_args
-    args.model = default_small_llama
-    return args
-
-
-@pytest.fixture()
-def recommended_mistral_run_args(recommended_run_args, default_small_mistral):
-    args = recommended_run_args
-    args.model = default_small_mistral
     return args
 
 

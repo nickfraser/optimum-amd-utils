@@ -48,3 +48,25 @@ def test_recommended_opt_acc(run_main_test, recommended_run_args_acc):
 def test_all_opt_acc(run_main_test, all_run_args_acc):
     args = all_run_args_acc
     run_main_test(args)
+
+
+@pytest.mark.run
+@pytest.mark.acc
+@pytest.mark.small_models
+@pytest.mark.short
+@pytest.mark.recommended
+def test_recommended_small_models_acc(run_main_test, recommended_run_args_acc, small_models):
+    args = recommended_run_args_acc
+    args.model = small_models
+    run_main_test(args)
+
+
+@pytest.mark.run
+@pytest.mark.acc
+@pytest.mark.large_models
+@pytest.mark.long
+@pytest.mark.recommended
+def test_recommended_large_models_acc(run_main_test, recommended_run_args_acc, large_models):
+    args = recommended_run_args_acc
+    args.model = large_models
+    run_main_test(args)
