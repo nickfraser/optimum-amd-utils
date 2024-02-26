@@ -19,16 +19,16 @@ def default_model():
 
 
 @pytest.fixture(scope="session", params=[
-    "facebook/opt-125m",
+    # "facebook/opt-125m",
     "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
-    "hf-internal-testing/tiny-random-MistralForCausalLM",
+    "openaccess-ai-collective/tiny-mistral",
 ])
 def small_models(request):
     yield request.param
 
 
 @pytest.fixture(scope="session", params=[
-    # "facebook/opt-1.3b",
+    "facebook/opt-1.3b",
     "TheBloke/Llama-2-7B-fp16",
     "mistralai/Mistral-7B-v0.1",
 ])
