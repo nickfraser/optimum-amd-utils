@@ -13,9 +13,9 @@ def recommended_args_cpu(recommended_args):
 @pytest.mark.opt
 @pytest.mark.short
 @pytest.mark.recommended
-def test_recommended_opt_cpu(ppl_main_test, recommended_args_cpu):
+def test_recommended_opt_cpu(ppl_main_test, recommended_args_cpu, default_model_with_ppl):
     args = recommended_args_cpu
-    ppl_main_test(args, 0.0, 0.0)
+    ppl_main_test(args, default_model_with_ppl.float_ppl, default_model_with_ppl.quant_ppl)
 
 
 @pytest.mark.run
