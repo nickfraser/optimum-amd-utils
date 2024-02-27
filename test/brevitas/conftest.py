@@ -2,6 +2,7 @@
 from collections import OrderedDict
 import os
 import shutil
+from dataclasses import dataclass
 
 import pytest
 
@@ -13,27 +14,80 @@ from optimum_amd_utils.examples.quantize_llm import main
 
 from test.brevitas.utils import ptid2pathname
 
+
+@dataclass
+class ModelAndPpl:
+    name: str
+    float_ppl: float
+    quant_ppl: float
+    onnx_ppl: float
+
+
 @pytest.fixture(scope="session")
-def default_model():
-    return "facebook/opt-125m"
+def default_model_with_ppl():
+    return ModelAndPpl(
+        name="facebook/opt-125m",
+        float_ppl=0.0,
+        quant_ppl=0.0,
+        onnx_ppl=0.0,
+    )
+
+
+@pytest.fixture(scope="session")
+def default_model(default_model_with_ppl):
+    return default_model_with_ppl.name
 
 
 @pytest.fixture(scope="session", params=[
-    # "facebook/opt-125m",
-    "TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
-    "openaccess-ai-collective/tiny-mistral",
+    ModelAndPpl(
+        name="TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
+        float_ppl=0.0,
+        quant_ppl=0.0,
+        onnx_ppl=0.0,
+    ),
+    ModelAndPpl(
+        name="openaccess-ai-collective/tiny-mistral",
+        float_ppl=0.0,
+        quant_ppl=0.0,
+        onnx_ppl=0.0,
+    ),
 ])
-def small_models(request):
+def small_model_with_ppl(request):
     yield request.param
+
+
+@pytest.fixture(scope="session")
+def small_models(small_model_with_ppl):
+    return small_model_with_ppl.name
 
 
 @pytest.fixture(scope="session", params=[
-    "facebook/opt-1.3b",
-    "TheBloke/Llama-2-7B-fp16",
-    "mistralai/Mistral-7B-v0.1",
+    ModelAndPpl(
+        name="facebook/opt-1.3b",
+        float_ppl=0.0,
+        quant_ppl=0.0,
+        onnx_ppl=0.0,
+    ),
+    ModelAndPpl(
+        name="TheBloke/Llama-2-7B-fp16",
+        float_ppl=0.0,
+        quant_ppl=0.0,
+        onnx_ppl=0.0,
+    ),
+    ModelAndPpl(
+        name="mistralai/Mistral-7B-v0.1",
+        float_ppl=0.0,
+        quant_ppl=0.0,
+        onnx_ppl=0.0,
+    ),
 ])
-def large_models(request):
+def large_model_with_ppl(request):
     yield request.param
+
+
+@pytest.fixture(scope="session")
+def large_models(large_model_with_ppl):
+    return large_model_with_ppl.name
 
 
 @pytest.fixture()
@@ -158,3 +212,11 @@ def run_main_test(run_main):
         onnx_model = onnx.load(os.path.join(args.onnx_output_path, "model.onnx"))
         shutil.rmtree(args.onnx_output_path)
     return _run_main_test
+
+
+@pytest.fixture(scope="session")
+def ppl_main_test(run_main):
+    def _ppl_main_test(args, expected_float_ppl, expected_quant_ppl):
+        return_val = run_main(args)
+        assert return_val["float_perplexity"] == return_val["quant_perplexity"]
+    return _ppl_main_test
