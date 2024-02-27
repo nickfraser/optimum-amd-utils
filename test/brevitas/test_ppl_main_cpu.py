@@ -8,7 +8,7 @@ def recommended_args_cpu(recommended_args):
     return args
 
 
-@pytest.mark.run
+@pytest.mark.ppl
 @pytest.mark.cpu
 @pytest.mark.opt
 @pytest.mark.short
@@ -18,7 +18,7 @@ def test_recommended_opt_cpu(ppl_main_test, recommended_args_cpu, default_model_
     ppl_main_test(args, default_model_with_ppl.float_ppl, default_model_with_ppl.quant_ppl)
 
 
-@pytest.mark.run
+@pytest.mark.ppl
 @pytest.mark.cpu
 @pytest.mark.small_models
 @pytest.mark.short
@@ -29,7 +29,7 @@ def test_recommended_small_models_cpu(ppl_main_test, recommended_args_cpu, small
     ppl_main_test(args, small_models_with_ppl.float_ppl, small_models_with_ppl.quant_ppl)
 
 
-@pytest.mark.run
+@pytest.mark.ppl
 @pytest.mark.cpu
 @pytest.mark.large_models
 @pytest.mark.long
