@@ -27,8 +27,8 @@ class ModelAndPpl:
 def default_model_with_ppl():
     return ModelAndPpl(
         name="facebook/opt-125m",
-        float_ppl=0.0,
-        quant_ppl=0.0,
+        float_ppl=69.3260,
+        quant_ppl=80.5520,
         onnx_ppl=0.0,
     )
 
