@@ -52,7 +52,7 @@ def default_model(default_model_with_ppl):
         onnx_ppl=0.0,
     ),
 ])
-def small_model_with_ppl(request):
+def small_models_with_ppl(request):
     yield request.param
 
 
@@ -81,7 +81,7 @@ def small_models(small_model_with_ppl):
         onnx_ppl=0.0,
     ),
 ])
-def large_model_with_ppl(request):
+def large_models_with_ppl(request):
     yield request.param
 
 
