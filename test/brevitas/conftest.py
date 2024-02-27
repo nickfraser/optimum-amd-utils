@@ -218,5 +218,6 @@ def run_main_test(run_main):
 def ppl_main_test(run_main):
     def _ppl_main_test(args, expected_float_ppl, expected_quant_ppl):
         return_val = run_main(args)
+        shutil.rmtree(args.onnx_output_path)
         assert return_val["float_perplexity"] == return_val["quant_perplexity"]
     return _ppl_main_test
