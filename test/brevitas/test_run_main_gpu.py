@@ -1,11 +1,7 @@
 
 import pytest
 
-
-single_gpu = pytest.mark.skipif(
-    torch.cuda.device_count() < 1, reason="At least one GPU required for the GPU tests"
-)
-
+from test.brevitas.utils import single_gpu
 
 @pytest.fixture()
 def toggle_run_args_gpu(toggle_run_args):

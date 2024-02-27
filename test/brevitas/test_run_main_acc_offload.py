@@ -3,11 +3,7 @@ import pytest
 
 from optimum.amd.brevitas.accelerate_utils import calc_gpu_device_map
 
-
-single_gpu = pytest.mark.skipif(
-    torch.cuda.device_count() < 1, reason="At least one GPU required for the GPU tests"
-)
-
+from test.brevitas.utils import single_gpu
 
 @pytest.fixture()
 def toggle_run_args_acc_offload(toggle_run_args):

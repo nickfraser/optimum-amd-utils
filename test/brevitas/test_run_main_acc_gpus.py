@@ -3,9 +3,7 @@ import pytest
 
 import torch
 
-multigpu = pytest.mark.skipif(
-    torch.cuda.device_count() < 2, reason="Multiple GPUs required for the multi-GPU tests"
-)
+from test.brevitas.utils import multigpu
 
 @pytest.fixture()
 def toggle_run_args_acc_gpus(toggle_run_args):
