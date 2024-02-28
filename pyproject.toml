@@ -30,13 +30,18 @@ build.backend = "setuptools.build_meta"
 markers = [
     "short",
     "long",
+    "very_long",
     "cpu",
     "gpu",
     "acc",
     "acc_offload",
+    "acc_gpus",
     "run",
+    "ppl",
     "recommended",
     "opt",
+    "small_models",
+    "large_models",
 ]
 testpaths = [
     "test",
