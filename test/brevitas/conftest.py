@@ -41,8 +41,8 @@ def default_model(default_model_with_ppl):
 @pytest.fixture(scope="session", params=[
     ModelAndPpl(
         name="TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
-        float_ppl=0.0,
-        quant_ppl=0.0,
+        float_ppl=13.8213,
+        quant_ppl=20.0345,
         onnx_ppl=0.0,
     ),
     ModelAndPpl(
