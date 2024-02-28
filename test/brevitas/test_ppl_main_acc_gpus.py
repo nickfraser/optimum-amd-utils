@@ -1,6 +1,8 @@
 
 import pytest
 
+import torch
+
 from test.brevitas.utils import multigpu
 
 @pytest.fixture()
