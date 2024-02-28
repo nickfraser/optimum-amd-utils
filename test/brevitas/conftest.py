@@ -57,8 +57,8 @@ def small_models_with_ppl(request):
 
 
 @pytest.fixture(scope="session")
-def small_models(small_model_with_ppl):
-    return small_model_with_ppl.name
+def small_models(small_models_with_ppl):
+    return small_models_with_ppl.name
 
 
 @pytest.fixture(scope="session", params=[
