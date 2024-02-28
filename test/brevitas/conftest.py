@@ -64,20 +64,20 @@ def small_models(small_model_with_ppl):
 @pytest.fixture(scope="session", params=[
     ModelAndPpl(
         name="facebook/opt-1.3b",
-        float_ppl=0.0,
-        quant_ppl=0.0,
+        float_ppl=37.1954460144043,
+        quant_ppl=44.095611572265625,
         onnx_ppl=0.0,
     ),
     ModelAndPpl(
         name="TheBloke/Llama-2-7B-fp16",
-        float_ppl=0.0,
-        quant_ppl=0.0,
+        float_ppl=10.227946281433105,
+        quant_ppl=456.3989562988281,
         onnx_ppl=0.0,
     ),
     ModelAndPpl(
         name="mistralai/Mistral-7B-v0.1",
-        float_ppl=0.0,
-        quant_ppl=0.0,
+        float_ppl=10.43802261352539,
+        quant_ppl=38.815269470214844,
         onnx_ppl=0.0,
     ),
 ])
