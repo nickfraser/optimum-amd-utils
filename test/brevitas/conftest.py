@@ -105,6 +105,7 @@ def default_args(default_model, request):
     args.onnx_output_path = ptid2pathname(request.node.nodeid)
     args.gpu_device_map = None
     args.cpu_device_map = None
+    args.fuse_sequences = False
     return args
 
 
