@@ -49,7 +49,6 @@ def test_recommended_small_models_acc_gpus(ppl_main_test, recommended_args_acc_g
 @pytest.mark.large_models
 @pytest.mark.long
 @pytest.mark.recommended
-@pytest.mark.xfail(strict=False)
 @multigpu
 def test_recommended_large_models_acc_gpus(ppl_main_test, recommended_large_model_args_acc_gpus, large_models_with_ppl):
     args = recommended_large_model_args_acc_gpus

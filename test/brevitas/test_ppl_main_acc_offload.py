@@ -47,7 +47,6 @@ def test_recommended_small_models_acc_offload(ppl_main_test, recommended_args_ac
 @pytest.mark.large_models
 @pytest.mark.long
 @pytest.mark.recommended
-@pytest.mark.xfail(strict=False)
 @single_gpu
 def test_recommended_large_models_acc_offload(ppl_main_test, recommended_large_model_args_acc_offload, large_models_with_ppl):
     args = recommended_large_model_args_acc_offload
