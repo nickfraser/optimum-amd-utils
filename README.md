@@ -8,9 +8,9 @@ The test suite has been tested with the following:
  - python==3.11
  - PyTorch==2.12
  - accelerate==main
- - transformers==4.38.0
+ - transformers>=4.38.1
  - optimum>=1.17.0
- - brevitas>=0.10.2
+ - brevitas==dev
  - pytest==8.0.1
  - optimum-amd (See instructions below)
 
@@ -73,7 +73,7 @@ Again, assuming you have 3 GPUs.
 
 #### Deliverable Tests
 
-The following will test all the models that we're supposed to deilver on multiple GPUs:
+The following will test all the models that we're supposed to deliver on multiple GPUs:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2 pytest -m "large_models and ppl and acc_gpus"
