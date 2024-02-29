@@ -27,8 +27,8 @@ class ModelAndPpl:
 def default_model_with_ppl():
     return ModelAndPpl(
         name="facebook/opt-125m",
-        float_ppl=69.3260,
-        quant_ppl=80.5520,
+        float_ppl=39.5212,
+        quant_ppl=40.0199,
         onnx_ppl=0.0,
     )
 
@@ -41,14 +41,14 @@ def default_model(default_model_with_ppl):
 @pytest.fixture(scope="session", params=[
     ModelAndPpl(
         name="TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
-        float_ppl=13.8213,
-        quant_ppl=20.0345,
+        float_ppl=10.7711,
+        quant_ppl=12.8883,
         onnx_ppl=0.0,
     ),
     ModelAndPpl(
-        name="openaccess-ai-collective/tiny-mistral",
-        float_ppl=0.0,
-        quant_ppl=0.0,
+        name="Locutusque/TinyMistral-248M",
+        float_ppl=134.9662,
+        quant_ppl=140.9265,
         onnx_ppl=0.0,
     ),
 ])
