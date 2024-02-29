@@ -56,8 +56,8 @@ CUDA_VISIBLE_DEVICES=0 pytest "test/brevitas/test_main.py::test_toggle_opt_acc[r
 A good set of tests to run to test that the main modes don't fail are:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 pytest -m "short and run and (opt or small_models) and (cpu or gpu)"
-CUDA_VISIBLE_DEVICES=1 pytest -m "short and run and (opt or small_models) and (acc or acc_offload)"
+CUDA_VISIBLE_DEVICES=0 pytest -m "short and run and (opt or small_models) and (cpu or gpu) and not recommended"
+CUDA_VISIBLE_DEVICES=1 pytest -m "short and run and (opt or small_models) and (acc or acc_offload) and not recommended"
 CUDA_VISIBLE_DEVICES=2 pytest -m "short and run and (opt or small_models) and recommended"
 ```
 
