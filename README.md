@@ -22,6 +22,7 @@ The easiest way to set up the environment is with miniforge as follows:
 mamba env create -n oamdu -f conda/oamd_hf_main_pt2.1.2_minimal.yml
 pip install -e /path/to/optimum-amd/
 ln -s /path/to/optimum-amd/examples/quantization/brevitas/quantize_llm.py src/optimum_amd_utils/examples/
+ln -s /path/to/optimum-amd/examples/quantization/brevitas/validate_onnx.py src/optimum_amd_utils/examples/
 pip install -e .
 ```
 
