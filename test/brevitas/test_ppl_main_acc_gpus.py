@@ -29,7 +29,7 @@ def recommended_large_model_args_acc_gpus(recommended_args):
 @multigpu
 def test_recommended_opt_acc_gpus(ppl_main_test, recommended_args_acc_gpus, default_model_with_ppl):
     args = recommended_args_acc_gpus
-    ppl_main_test(args, default_model_with_ppl.float_ppl, default_model_with_ppl.quant_ppl)
+    ppl_main_test(args, default_model_with_ppl.float_ppl, default_model_with_ppl.quant_ppl, default_model_with_ppl.onnx_ppl)
 
 
 @pytest.mark.ppl
@@ -41,7 +41,7 @@ def test_recommended_opt_acc_gpus(ppl_main_test, recommended_args_acc_gpus, defa
 def test_recommended_small_models_acc_gpus(ppl_main_test, recommended_args_acc_gpus, small_models_with_ppl):
     args = recommended_args_acc_gpus
     args.model = small_models_with_ppl.name
-    ppl_main_test(args, small_models_with_ppl.float_ppl, small_models_with_ppl.quant_ppl)
+    ppl_main_test(args, small_models_with_ppl.float_ppl, small_models_with_ppl.quant_ppl, small_models_with_ppl.onnx_ppl)
 
 
 @pytest.mark.ppl
@@ -53,4 +53,4 @@ def test_recommended_small_models_acc_gpus(ppl_main_test, recommended_args_acc_g
 def test_recommended_large_models_acc_gpus(ppl_main_test, recommended_large_model_args_acc_gpus, large_models_with_ppl):
     args = recommended_large_model_args_acc_gpus
     args.model = large_models_with_ppl.name
-    ppl_main_test(args, large_models_with_ppl.float_ppl, large_models_with_ppl.quant_ppl)
+    ppl_main_test(args, large_models_with_ppl.float_ppl, large_models_with_ppl.quant_ppl, large_models_with_ppl.onnx_ppl)

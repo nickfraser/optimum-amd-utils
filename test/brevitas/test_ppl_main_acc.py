@@ -15,7 +15,7 @@ def recommended_args_acc(recommended_args):
 @pytest.mark.recommended
 def test_recommended_opt_acc(ppl_main_test, recommended_args_acc, default_model_with_ppl):
     args = recommended_args_acc
-    ppl_main_test(args, default_model_with_ppl.float_ppl, default_model_with_ppl.quant_ppl)
+    ppl_main_test(args, default_model_with_ppl.float_ppl, default_model_with_ppl.quant_ppl, default_model_with_ppl.onnx_ppl)
 
 
 @pytest.mark.ppl
@@ -26,7 +26,7 @@ def test_recommended_opt_acc(ppl_main_test, recommended_args_acc, default_model_
 def test_recommended_small_models_acc(ppl_main_test, recommended_args_acc, small_models_with_ppl):
     args = recommended_args_acc
     args.model = small_models_with_ppl.name
-    ppl_main_test(args, small_models_with_ppl.float_ppl, small_models_with_ppl.quant_ppl)
+    ppl_main_test(args, small_models_with_ppl.float_ppl, small_models_with_ppl.quant_ppl, small_models_with_ppl.onnx_ppl)
 
 
 @pytest.mark.ppl
@@ -38,4 +38,4 @@ def test_recommended_small_models_acc(ppl_main_test, recommended_args_acc, small
 def test_recommended_large_models_acc(ppl_main_test, recommended_args_acc, large_models_with_ppl):
     args = recommended_args_acc
     args.model = large_models_with_ppl.name
-    ppl_main_test(args, large_models_with_ppl.float_ppl, large_models_with_ppl.quant_ppl)
+    ppl_main_test(args, large_models_with_ppl.float_ppl, large_models_with_ppl.quant_ppl, large_models_with_ppl.onnx_ppl)

@@ -11,6 +11,7 @@ import torch
 import onnx
 
 from optimum_amd_utils.examples.quantize_llm import main
+from optimum_amd_utils.examples.validate_onnx import main as vomain
 
 from test.brevitas.utils import ptid2pathname
 
@@ -158,6 +159,19 @@ def is_static(request):
     yield request.param
 
 
+@pytest.fixture(scope="session")
+def onnx_args():
+    def _onnx_args(args):
+        oargs = OrderedDict()
+        oargs.model = args.model
+        oargs.seqlen = args.seqlen
+        oargs.nsamples = args.nsamples
+        oargs.fuse_sequences = args.fuse_sequences
+        oargs.onnx_path = args.onnx_output_path
+        return oargs
+    return _onnx_args
+
+
 @pytest.fixture()
 def all_run_args(default_run_args, apply_gptq, apply_weight_equalization, apply_bias_correction, activations_equalization, is_static):
     args = default_run_args
@@ -205,6 +219,14 @@ def run_main():
 
 
 @pytest.fixture(scope="session")
+def run_validate_onnx():
+    def _run_validate_onnx(args):
+        return_val = vomain(args)
+        return return_val
+    return _run_validate_onnx
+
+
+@pytest.fixture(scope="session")
 def run_main_test(run_main):
     def _run_main_test(args):
         return_val = run_main(args)
@@ -216,9 +238,13 @@ def run_main_test(run_main):
 
 
 @pytest.fixture(scope="session")
-def ppl_main_test(run_main):
-    def _ppl_main_test(args, expected_float_ppl, expected_quant_ppl):
+def ppl_main_test(run_main, run_validate_onnx, onnx_args):
+    def _ppl_main_test(args, expected_float_ppl, expected_quant_ppl, expected_onnx_ppl):
         return_val = run_main(args)
+        oargs = onnx_args(args)
+        assert isclose(return_val["float_perplexity"].cpu().numpy(), expected_float_ppl)
+        assert isclose(return_val["quant_perplexity"].cpu().numpy(), expected_quant_ppl)
+        oreturn_val = run_validate_onnx(oargs)
         shutil.rmtree(args.onnx_output_path)
-        assert return_val["float_perplexity"] == return_val["quant_perplexity"]
+        assert isclose(oreturn_val["onnx_perplexity"].cpu().numpy(), expected_onnx_ppl)
     return _ppl_main_test

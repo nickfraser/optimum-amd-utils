@@ -1,6 +1,8 @@
 
 import pytest
 
+import numpy as np
+
 import torch
 
 single_gpu = pytest.mark.skipif(
@@ -15,3 +17,10 @@ multigpu = pytest.mark.skipif(
 
 def ptid2pathname(string):
     return string.replace("/", "-").replace(":", "-")
+
+
+def allclose(x, y):
+    return np.allclose(x, y, rtol=1e-05, atol=1e-08, equal_nan=False)
+
+def allexact(x, y):
+    return np.allclose(x, y, rtol=0.0, atol=0.0, equal_nan=False)
