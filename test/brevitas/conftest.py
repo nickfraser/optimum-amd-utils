@@ -246,5 +246,5 @@ def ppl_main_test(run_main, run_validate_onnx, onnx_args):
         assert allclose(return_val["quant_perplexity"].cpu().numpy(), expected_quant_ppl)
         oreturn_val = run_validate_onnx(oargs)
         shutil.rmtree(args.onnx_output_path)
-        assert allclose(oreturn_val["onnx_perplexity"].cpu().numpy(), expected_onnx_ppl)
+        assert allclose(oreturn_val["onnx_perplexity"], expected_onnx_ppl)
     return _ppl_main_test
