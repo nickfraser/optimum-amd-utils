@@ -13,7 +13,7 @@ import onnx
 from optimum_amd_utils.examples.quantize_llm import main
 from optimum_amd_utils.examples.validate_onnx import main as vomain
 
-from test.brevitas.utils import ptid2pathname
+from test.brevitas.utils import ptid2pathname, allclose
 
 
 @dataclass
@@ -242,9 +242,9 @@ def ppl_main_test(run_main, run_validate_onnx, onnx_args):
     def _ppl_main_test(args, expected_float_ppl, expected_quant_ppl, expected_onnx_ppl):
         return_val = run_main(args)
         oargs = onnx_args(args)
-        assert isclose(return_val["float_perplexity"].cpu().numpy(), expected_float_ppl)
-        assert isclose(return_val["quant_perplexity"].cpu().numpy(), expected_quant_ppl)
+        assert allclose(return_val["float_perplexity"].cpu().numpy(), expected_float_ppl)
+        assert allclose(return_val["quant_perplexity"].cpu().numpy(), expected_quant_ppl)
         oreturn_val = run_validate_onnx(oargs)
         shutil.rmtree(args.onnx_output_path)
-        assert isclose(oreturn_val["onnx_perplexity"].cpu().numpy(), expected_onnx_ppl)
+        assert allclose(oreturn_val["onnx_perplexity"].cpu().numpy(), expected_onnx_ppl)
     return _ppl_main_test
