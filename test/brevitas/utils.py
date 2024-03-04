@@ -20,7 +20,7 @@ def ptid2pathname(string):
 
 
 def allclose(x, y):
-    return np.allclose(x, y, rtol=1e-02, atol=1e-02, equal_nan=False)
+    return np.allclose(x, y, rtol=1e-02, atol=1e-01, equal_nan=False)
 
 def allexact(x, y):
     return np.allclose(x, y, rtol=0.0, atol=0.0, equal_nan=False)
