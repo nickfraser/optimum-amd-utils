@@ -1,6 +1,8 @@
 
 import pytest
 
+from optimum.amd.brevitas.accelerate_utils import calc_gpu_device_map
+
 from test.brevitas.utils import single_gpu
 
 @pytest.fixture()
