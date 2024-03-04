@@ -43,14 +43,14 @@ def default_model(default_model_with_ppl):
     ModelAndPpl(
         name="TinyLlama/TinyLlama-1.1B-intermediate-step-1431k-3T",
         float_ppl=10.7711,
-        quant_ppl=64835.2,
-        onnx_ppl=64835.2,
+        quant_ppl=12.8883,
+        onnx_ppl=12.8883,
     ),
     ModelAndPpl(
         name="Locutusque/TinyMistral-248M",
         float_ppl=134.966,
-        quant_ppl=165.032,
-        onnx_ppl=165.032,
+        quant_ppl=140.927,
+        onnx_ppl=140.927,
     ),
 ])
 def small_models_with_ppl(request):
