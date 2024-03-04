@@ -107,6 +107,7 @@ def default_args(default_model, request):
     args.gpu_device_map = None
     args.cpu_device_map = None
     args.fuse_sequences = False
+    args.qdq_weights = False
     return args
 
 
