@@ -67,7 +67,7 @@ def small_models(small_models_with_ppl):
         name="facebook/opt-1.3b",
         float_ppl=19.6675,
         quant_ppl=19.8667,
-        onnx_ppl=19.8667,
+        onnx_ppl=19.8887,
     ),
     ModelAndPpl(
         name="TheBloke/Llama-2-7B-fp16",
