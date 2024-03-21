@@ -1,0 +1,29 @@
+name: oamd_pt2.1.2
+channels:
+  - pytorch
+  - conda-forge
+  - nvidia
+dependencies:
+  - pytorch==2.1.2
+  - pytorch-cuda=11.8
+  - pre-commit
+  - onnx
+  - onnxruntime>=1.15.0
+  - packaging
+  - pyyaml
+  - setuptools_scm
+  - tqdm
+  - pytest
+  - numpy
+  - setuptools
+  - sympy
+  - typing-extensions>=3.7.4
+  - accelerate>=0.28.0
+  - transformers>=4.38.1
+  - optimum>=1.17.0
+  - cmake>=3.22
+  - ninja
+  - pip:
+    - onnxoptimizer
+    - unfoldNd
+    - git+https://github.com/Xilinx/brevitas.git@dev
